@@ -43,9 +43,12 @@ public class PlanUtils {
    */
   public static <T, R> List<R> applyFirst(List<? extends PartialFunction<T, List<R>>> fns, T arg) {
     PartialFunction<T, List<R>> fn = merge(fns);
+    log.warn("Trying {} for {}", fns.toString(), arg.toString());
     if (fn.isDefinedAt(arg)) {
+      log.warn("works");
       return fn.apply(arg);
     }
+    log.warn("fails");
     return Collections.emptyList();
   }
 
